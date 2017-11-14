@@ -4,18 +4,19 @@ require 'nokogiri'
 
 states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
-# states = ["Alabama"]
+states = ["West Virginia"]
 
 # *********Beginning of Sanitation**********
 
 # Sanitize ingredients that we want to rephrase or remove.
-
+# For any item to omit add to "omit"
+# For any item to rename first add the name to be modified followed by the rename
 ingredients_to_omit = [ "Christmas Trees", "Wreathes"]
 ingredients_to_rename = [
 	["Oysters, Eastern", "Oyster"], 
 	["Turkey - Standard Bronze", "Turkey"],
 	["Turkey - Midget White", "Turkey"],
-	["Turkey - Bourbon Red", "Turkey"]
+	["Turkey - Bourbon Red", "Turkey"],
 	["Pollock (Alaskan)", "Cod"]
 ]
 
@@ -174,18 +175,24 @@ end
 # add a record for every week in that season
 # with corresponding IDs for state and ingredient 
 
-# for state in data
-# 	state_name = state[:state_name]
-# 	for season in state[:season_data]		# <- returns an array
-# 		get_weeks_from_period(season[:season_name]).each do |week_num| # <- returns an array of week numbers
-# 			for ingredient in season[:ingredients]
-# 				puts "Create: "
-# 				puts "#{state_name}, #{season[:season_name]}, #{week_num}, #{ingredient}"
-# 				puts "*******"
-# 			end
-# 		end
-# 	end 
-# end
+rows_to_insert = []
+for state in data
+	state_name = state[:state_name]
+	state_id = State.find_by(name: state_name)
+	for season in state[:season_data]		# <- returns an array
+		get_weeks_from_period(season[:season_name]).each do |week_num| # <- returns an array of week numbers
+			for ingredient in season[:ingredients]
+				# puts "Create: "
+				# puts "#{state_name}, #{season[:season_name]}, #{week_num}, #{ingredient}"
+				# puts "*******"
+				create_hash = {}
+				create_hash[:ingredient_id] = xxx
+				create_hash[:state_id] = xxx
+				create_hash[:in_season_week] = week_num
+			end
+		end
+	end 
+end
 
 
 
