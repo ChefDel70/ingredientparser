@@ -82,7 +82,11 @@ ingredients_to_remove.each do |i|
  master_ingredients.delete(i)
 end
 master_ingredients += ingredients_to_add
-puts "#{master_ingredients.uniq.sort}.map{ |ing| 'Ingredient.create(ing)'}"
+
+# seed ingredients table
+# Output is designed to be copied from the terminal and pasted into the seeds.rb
+puts "#{master_ingredients.uniq.sort}.each{ |ing| Ingredient.create(name: ing)}"
+
 
 
 
